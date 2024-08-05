@@ -1,0 +1,45 @@
+class Solution {
+public:
+    string kthDistinct(vector<string>& arr, int k) {
+        unordered_map<string,int> mp;
+        int curr=0;
+        for(int i=0;i<arr.size();i++)
+        {
+            mp[arr[i]]++;
+        }
+        for(auto i:arr)
+        {
+            if(mp[i]>1)
+                continue;
+            curr++;
+            if(curr==k)
+                return i;
+        }
+        return "";
+    }
+};
+
+Approach:
+Count Occurrences: Use an unordered map (unordered_map<string, int>) to count the occurrences of each string in the input vector arr.
+
+Find k-th Distinct String:
+Iterate through the arr vector.
+For each string, check if its occurrence count in the map is exactly 1 (i.e., it is distinct).
+Keep a counter to track how many distinct strings you've encountered.
+When the counter reaches k, return the current string.
+If no k-th distinct string is found by the end of the iteration, return an empty string.
+
+Runtime Complexity:
+
+Building the Frequency Map:
+Time Complexity: 
+O(n), where n is the number of elements in arr. This is because each insertion into the unordered map takes average O(1) time, and there are n insertions.
+Finding the k-th Distinct String:
+
+Time Complexity: 
+O(n), where n is the number of elements in arr. Each lookup and comparison in the unordered map takes average O(1) time, and we potentially scan all n elements in arr.
+Overall Time Complexity:
+Combining both steps, the overall time complexity is O(n).
+
+Space Complexity:
+Space Complexity: O(n), due to the space required for the unordered map that stores the frequency of each string.
