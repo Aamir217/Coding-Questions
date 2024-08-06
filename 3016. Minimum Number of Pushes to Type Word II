@@ -1,0 +1,36 @@
+class Solution {
+ public:
+  int minimumPushes(string word) {
+    int ans = 0;
+    vector<int> count(26);
+
+    for (const char c : word)
+      ++count[c - 'a'];
+
+    ranges::sort(count, greater<>());
+
+    for (int i = 0; i < 26; ++i)
+      ans += count[i] * (i / 8 + 1);
+
+    return ans;
+  }
+};
+
+
+Here's an intuition and approach breakdown for this solution, along with its runtime complexity:
+Intuition:
+The problem this code solves is likely related to calculating the minimum number of pushes required to type a word on a keypad where multiple letters share the same key (similar to old mobile phone keypads).
+
+Approach:
+Count the frequency of each letter in the word.
+Sort these frequencies in descending order.
+Assign the most frequent letters to the first key, then the second key, and so on.
+Calculate the total number of pushes required based on the frequency of each letter and its assigned key.
+
+Runtime Complexity:
+Counting the frequency: O(n), where n is the length of the word.
+Sorting the frequencies: O(26 log 26), which is effectively O(1) since it's always working with 26 letters.
+Calculating the pushes: O(26), which is O(1).
+
+The overall time complexity is O(n) due to the initial frequency counting step.
+The space complexity is O(1) because it uses a fixed-size vector of 26 elements regardless of the input size.
